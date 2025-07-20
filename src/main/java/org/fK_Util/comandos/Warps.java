@@ -17,7 +17,7 @@ public class Warps implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
 
-        if(!sender.hasPermission("FK_UTIL.Warps")) {
+        if (!sender.hasPermission("FK_UTIL.Warps")) {
             sender.sendMessage(ChatColor.RED + "Você não possue permissão!");
             return true;
         }
@@ -33,7 +33,7 @@ public class Warps implements CommandExecutor {
         Set<String> warpSet = warps.getKeys(false);
 
         if (warpSet.isEmpty()) {
-            p.sendColouredMessage(config.getString("options.prefix")+ " &cNenhuma warp foi configurada ainda.");
+            p.sendColouredMessage(config.getString("options.prefix") + " &cNenhuma warp foi configurada ainda.");
             return true;
         }
 

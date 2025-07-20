@@ -19,14 +19,14 @@ public class Lobby implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
         FileConfiguration config = FK_Util.getConfig("config");
-        if(!(sender instanceof  Player player)) {
+        if (!(sender instanceof Player player)) {
             System.out.println(config.getString("options.prefix") + " Apenas jogadores podem usar este comando.");
             return true;
         }
 
         PlayerCustom p = new PlayerCustom(player);
 
-        if(!config.contains("essentialLocation.lobby")) {
+        if (!config.contains("essentialLocation.lobby")) {
             p.sendColouredMessage(config.getString("options.prefix") + " &cNão encontrei a localização do lobby, por favor, avise a um administrador.");
             return true;
         }

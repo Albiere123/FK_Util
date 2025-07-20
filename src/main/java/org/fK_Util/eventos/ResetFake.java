@@ -3,9 +3,9 @@ package org.fK_Util.eventos;
 import com.mojang.authlib.GameProfile;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_21_R3.entity.CraftPlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.fK_Util.comandos.Fake;
 

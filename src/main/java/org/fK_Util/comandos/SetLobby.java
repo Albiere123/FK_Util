@@ -14,19 +14,19 @@ public class SetLobby implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         FileConfiguration config = FK_Util.getConfig("config");
-        if(!(sender instanceof Player player)) {
+        if (!(sender instanceof Player player)) {
             System.out.println(config.get("options.prefix") + " Apenas para jogadores!");
             return true;
         }
 
         PlayerCustom p = new PlayerCustom(player);
 
-        if(!(player.hasPermission("FK_UTIL.Setlobby"))) {
+        if (!(player.hasPermission("FK_UTIL.Setlobby"))) {
             p.sendColouredMessage(config.getString("options.prefix") + " &cVocê não possue permissão!");
             return true;
         }
 
-        if(config.contains("essentialLocation.lobby")) {
+        if (config.contains("essentialLocation.lobby")) {
             p.sendColouredMessage(config.getString("options.prefix") + " &cJá existe um lobby, por favor, delete o anterior e salve este.");
             return true;
         }

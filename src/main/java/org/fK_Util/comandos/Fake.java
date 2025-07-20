@@ -3,12 +3,12 @@ package org.fK_Util.comandos;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.craftbukkit.v1_21_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.CommandExecutor;
 import org.fK_Util.FK_Util;
 import org.fK_Util.PlayerCustom;
 
@@ -36,6 +36,7 @@ public class Fake implements CommandExecutor {
     );
 
     public static final Map<Player, String> ORIGINAL_NAMES = new HashMap<>();
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {
@@ -44,18 +45,17 @@ public class Fake implements CommandExecutor {
         }
         PlayerCustom pl = new PlayerCustom(((Player) sender).getPlayer());
         FileConfiguration config = FK_Util.getConfig("config");
-        if(!player.hasPermission("FK_UTIL.Fake")) {
+        if (!player.hasPermission("FK_UTIL.Fake")) {
             pl.sendColouredMessage(config.getString("options.prefix") + " &cVocê não possue permissão!");
             return true;
         }
         String fakeNick = "";
-        if (args.length  > 0) {
+        if (args.length > 0) {
             fakeNick = args[0];
-        }
-        else {
+        } else {
             fakeNick = fakeNicks[new Random().nextInt(fakeNicks.length)];
         }
-        if(Objects.equals(args[0], "reset")) {
+        if (Objects.equals(args[0], "reset")) {
             CraftPlayer cp = (CraftPlayer) player;
 
             try {
@@ -87,16 +87,16 @@ public class Fake implements CommandExecutor {
             return true;
         }
 
-            String original = ORIGINAL_NAMES.getOrDefault(player, null);
-            if(original == null) {
-                ORIGINAL_NAMES.put(player, player.getDisplayName());
-            }
-            UUID skin1 = UUID.fromString(skins.get(new Random().nextInt(skins.size())));
-            SkinData skin = getSkin(skin1);
+        String original = ORIGINAL_NAMES.getOrDefault(player, null);
+        if (original == null) {
+            ORIGINAL_NAMES.put(player, player.getDisplayName());
+        }
+        UUID skin1 = UUID.fromString(skins.get(new Random().nextInt(skins.size())));
+        SkinData skin = getSkin(skin1);
 
-            applyFake(player, fakeNick, skin.value, skin.signature);
+        applyFake(player, fakeNick, skin.value, skin.signature);
 
-            pl.sendColouredMessage(config.getString("options.prefix") + " &aFake aplicado como: &f" + fakeNick);
+        pl.sendColouredMessage(config.getString("options.prefix") + " &aFake aplicado como: &f" + fakeNick);
 
         return true;
     }
@@ -158,5 +158,6 @@ public class Fake implements CommandExecutor {
         return null;
     }
 
-    private record SkinData(String value, String signature) {}
+    private record SkinData(String value, String signature) {
+    }
 }

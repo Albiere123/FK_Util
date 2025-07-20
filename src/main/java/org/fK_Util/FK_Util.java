@@ -1,7 +1,6 @@
 package org.fK_Util;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,13 +17,12 @@ public final class FK_Util extends JavaPlugin {
     private static FileConfiguration warps;
 
 
-
     @Override
     public void onEnable() {
         pls = this;
         configM = new Config(this);
         reloadConfigs();
-        if(!config.contains("options.prefix")) {
+        if (!config.contains("options.prefix")) {
             config.set("options.prefix", "&e[ &fFK_Util &e] &f");
             configM.saveConfig("config");
         }
@@ -39,11 +37,11 @@ public final class FK_Util extends JavaPlugin {
         Objects.requireNonNull(getCommand("lobby")).setExecutor(new Lobby());
         Objects.requireNonNull(getCommand("setlobby")).setExecutor(new SetLobby());
         Objects.requireNonNull(getCommand("dellobby")).setExecutor(new DelLobby());
-        Bukkit.getConsoleSender().sendMessage(Objects.requireNonNull(config.getString("options.prefix")).replaceAll("&", "§")+" Sistema Iniciado!!");
+        Bukkit.getConsoleSender().sendMessage(Objects.requireNonNull(config.getString("options.prefix")).replaceAll("&", "§") + " Sistema Iniciado!!");
     }
 
     public static FileConfiguration getConfig(String str) {
-        if (str.equalsIgnoreCase("warps")){
+        if (str.equalsIgnoreCase("warps")) {
             return warps;
         } else {
             return config;
@@ -53,6 +51,7 @@ public final class FK_Util extends JavaPlugin {
     public static void saveWarp() {
         configM.saveConfig("warps");
     }
+
     public static void reloadConfigs() {
         configM.loadConfig("config");
         configM.loadConfig("warps");
@@ -60,6 +59,7 @@ public final class FK_Util extends JavaPlugin {
         warps = configM.getConfig("warps");
 
     }
+
     @Override
     public void onDisable() {
         // Plugin shutdown logic
@@ -68,4 +68,4 @@ public final class FK_Util extends JavaPlugin {
     public static Plugin getpl() {
         return pls;
     }
- }
+}

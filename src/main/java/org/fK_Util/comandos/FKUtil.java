@@ -15,7 +15,7 @@ import java.util.Objects;
 public class FKUtil implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
 
-        if(!sender.hasPermission("FK_UTIL.Fkutil")) {
+        if (!sender.hasPermission("FK_UTIL.Fkutil")) {
             sender.sendMessage(ChatColor.RED + "Você não possue permissão!");
             return true;
         }
@@ -36,29 +36,29 @@ public class FKUtil implements CommandExecutor {
             } else {
                 sendMessage(sender, "Você não possue &cpermissão&f.", true);
             }
-        }else {
+        } else {
             sendMessage(sender, "Opções disponíveis:", true);
             sendMessage(sender, "Reload - Recarrega todas as configurações", false);
         }
-            return false;
-        }
+        return false;
+    }
 
     public void sendMessage(CommandSender sender, String str, Boolean prefix) {
         FileConfiguration config = FK_Util.getConfig("config");
-        if(sender instanceof Player) {
+        if (sender instanceof Player) {
             PlayerCustom p = new PlayerCustom((Player) sender);
-            if(prefix) {
-            p.sendColouredMessage(config.getString("options.prefix")+" "+str);
-        } else {
+            if (prefix) {
+                p.sendColouredMessage(config.getString("options.prefix") + " " + str);
+            } else {
                 String ultimaCor = getUltimoCodigoDeCor(Objects.requireNonNull(config.getString("options.prefix")));
-                p.sendColouredMessage(ultimaCor.replaceAll("&", "§")+str);
+                p.sendColouredMessage(ultimaCor.replaceAll("&", "§") + str);
             }
         } else {
             if (prefix) {
-            Bukkit.getConsoleSender().sendMessage(config.getString("options.prefix").replaceAll("&", "§")+" "+str);
-        }else {
+                Bukkit.getConsoleSender().sendMessage(config.getString("options.prefix").replaceAll("&", "§") + " " + str);
+            } else {
                 String ultimaCor = getUltimoCodigoDeCor(Objects.requireNonNull(config.getString("options.prefix")));
-                Bukkit.getConsoleSender().sendMessage(ultimaCor.replaceAll("&", "§")+str);
+                Bukkit.getConsoleSender().sendMessage(ultimaCor.replaceAll("&", "§") + str);
             }
         }
     }
