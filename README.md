@@ -18,5 +18,5 @@ Sistema de permissões:
 Sistema de permissões de Warps:
   - FK_UTIL.Warp.warps.<warp>
   - FK_UTIL.Warp.admin
-  - 
+    
   Onde <warp> é o nome da warp tudo em minúsculo.
