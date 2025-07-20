@@ -1,0 +1,27 @@
+name: FK_Util
+version: '1.0-SNAPSHOT'
+main: org.fK_Util.FK_Util
+api-version: '1.21.4'
+depend: [ProtocolLib]
+commands:
+  ping:
+    description: veja seu ping!
+    usage: /ping
+  fkutil:
+    description: configurações do plugin -> fkutil
+  warp:
+    description: Teleporte-se até uma warp usando -> warp <nome da warp>
+  setwarp:
+    description: Configure uma nova warp -> setwarp <nome da warp>
+  warps:
+    description: Veja a lista de warps -> warps
+  delwarp:
+    description: Delete uma warp -> delwarp <nome da warp>
+  fake:
+    description: Se transforme em outra pessoa.
+  lobby:
+    description: teleporte até o lobby do servidor.
+  setlobby:
+    description: set o lobby do servidor.
+  dellobby:
+    description: delete o lobby do servidor.

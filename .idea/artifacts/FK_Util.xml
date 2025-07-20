@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="FK_Util">
+    <output-path>$USER_HOME$/OneDrive/Desktop/Servidor testes/plugins</output-path>
+    <root id="archive" name="FK_Util.jar">
+      <element id="module-output" name="FK_Util" />
+    </root>
+  </artifact>
+</component>
