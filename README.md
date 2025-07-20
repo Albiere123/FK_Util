@@ -13,10 +13,10 @@ Plugin de minecraft focado em utilidades, comandos:
 Sistema de permissões:
   - FK_UTIL.\<Comando>
 
-  Onde <Comando> é o nome do comando com apenas a primeira letra maiúscula.
+  Onde \<Comando> é o nome do comando com apenas a primeira letra maiúscula.
 
 Sistema de permissões de Warps:
   - FK_UTIL.Warp.warps.\<warp>
   - FK_UTIL.Warp.admin
     
-  Onde <warp> é o nome da warp tudo em minúsculo.
+  Onde \<warp> é o nome da warp tudo em minúsculo.
