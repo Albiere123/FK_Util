@@ -23,19 +23,19 @@ public class DelWarp implements CommandExecutor {
         FileConfiguration warps = FK_Util.getConfig("warps");
 
         if (args.length == 0) {
-            (new PlayerCustom((Player) sender)).sendColouredMessage(config.getString("options.prefix") + " &fInsira o nome da warp.");
+            (new PlayerCustom((Player) sender)).sendColouredMessage(FK_Util.getPrefix() + " &fInsira o nome da warp.");
             return true;
         }
 
         if (!(warps.contains(args[0].toLowerCase()))) {
-            (new PlayerCustom((Player) sender)).sendColouredMessage(config.getString("options.prefix") + " &cEssa warp não existe!");
+            (new PlayerCustom((Player) sender)).sendColouredMessage(FK_Util.getPrefix() + " &cEssa warp não existe!");
             return true;
         }
 
         warps.set(args[0].toLowerCase(), null);
         FK_Util.saveWarp();
 
-        (new PlayerCustom((Player) sender)).sendColouredMessage(config.getString("options.prefix") + " &aWarp deletada com sucesso!");
+        (new PlayerCustom((Player) sender)).sendColouredMessage(FK_Util.getPrefix() + " &aWarp deletada com sucesso!");
         return true;
     }
 }

@@ -13,14 +13,20 @@ public class Ping implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
 
-        FileConfiguration config = FK_Util.getConfig("config");
-        if (!(sender instanceof Player)) {
-            Bukkit.getConsoleSender().sendMessage(config.getString("options.prefix") + " Apenas jogadores podem executar o comando!");
-        } else {
-            PlayerCustom p = new PlayerCustom((Player) sender);
-            p.sendColouredMessage(config.getString("options.prefix") + " &bO seu ping é: &a" + p.getPing() + "ms.");
-
+        if (!(sender instanceof Player player)) {
+            Bukkit.getConsoleSender().sendMessage(FK_Util.getPrefix() + " Apenas jogadores podem executar o comando!");
+            return true;
         }
+
+        PlayerCustom p = new PlayerCustom(player);
+        if (!(player.hasPermission("FK_UTIL.Ping"))) {
+            p.sendColouredMessage(FK_Util.getPrefix() + " &cVocê não possue permissão!");
+            return true;
+        }
+
+        p.sendColouredMessage(FK_Util.getPrefix() + " &bO seu ping é: &a" + p.getPing() + "ms.");
+
+
         return true;
     }
 }

@@ -14,21 +14,20 @@ public class SetWarp implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
 
-        FileConfiguration config = FK_Util.getConfig("config");
         if (!(sender instanceof Player p)) {
-            Bukkit.getConsoleSender().sendMessage(config.getString("options.prefix") + " Apenas jogadores podem executar o comando!");
+            Bukkit.getConsoleSender().sendMessage(FK_Util.getPrefix() + " Apenas jogadores podem executar o comando!");
             return true;
         }
 
         if (!sender.hasPermission("FK_UTIL.Setwarp")) {
-            (new PlayerCustom(p)).sendColouredMessage(config.getString("options.prefix") + " &cVocê não possue permissão!");
+            (new PlayerCustom(p)).sendColouredMessage(FK_Util.getPrefix() + " &cVocê não possue permissão!");
             return true;
         }
 
         FileConfiguration warps = FK_Util.getConfig("warps");
         if (args.length > 0) {
             if (warps.contains(args[0].toLowerCase())) {
-                (new PlayerCustom((Player) sender)).sendColouredMessage(config.getString("options.prefix") + " Já existe uma warp com esse nome!");
+                (new PlayerCustom((Player) sender)).sendColouredMessage(FK_Util.getPrefix() + " Já existe uma warp com esse nome!");
                 return true;
             }
             String warpGet = args[0].toLowerCase();
@@ -42,12 +41,12 @@ public class SetWarp implements CommandExecutor {
 
             try {
                 FK_Util.saveWarp();
-                (new PlayerCustom((Player) sender)).sendColouredMessage(config.getString("options.prefix") + " &aWarp setada com sucesso!");
+                (new PlayerCustom((Player) sender)).sendColouredMessage(FK_Util.getPrefix() + " &aWarp setada com sucesso!");
             } catch (Exception e) {
-                (new PlayerCustom((Player) sender)).sendColouredMessage(config.getString("options.prefix") + " &cFalha ao setar a warp!");
+                (new PlayerCustom((Player) sender)).sendColouredMessage(FK_Util.getPrefix() + " &cFalha ao setar a warp!");
             }
         } else {
-            (new PlayerCustom((Player) sender)).sendColouredMessage(config.getString("options.prefix") + " &fDefina um nome para a warp");
+            (new PlayerCustom((Player) sender)).sendColouredMessage(FK_Util.getPrefix() + " &fDefina um nome para a warp");
         }
         return true;
     }

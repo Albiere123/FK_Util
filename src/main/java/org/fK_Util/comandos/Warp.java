@@ -17,9 +17,8 @@ public class Warp implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
 
-        FileConfiguration config = FK_Util.getConfig("config");
         if (!(sender instanceof Player player)) {
-            Bukkit.getConsoleSender().sendMessage(config.getString("options.prefix") + " Apenas jogadores podem executar o comando!");
+            Bukkit.getConsoleSender().sendMessage(FK_Util.getPrefix() + " Apenas jogadores podem executar o comando!");
             return true;
         }
         FileConfiguration warps = FK_Util.getConfig("warps");
@@ -28,13 +27,13 @@ public class Warp implements CommandExecutor {
             String warpGet = args[0].toLowerCase();
             PlayerCustom p = new PlayerCustom(player);
             if (!warps.contains(warpGet)) {
-                p.sendColouredMessage(config.getString("options.prefix") + " &cNão encontrei esta warp.");
+                p.sendColouredMessage(FK_Util.getPrefix() + " &cNão encontrei esta warp.");
                 return true;
 
             }
 
             if (!player.hasPermission("FK_UTIL.Warp.warps." + warpGet)) {
-                (new PlayerCustom(player)).sendColouredMessage(config.getString("options.prefix") + " &cVocê não possue permissão para visitar a warp.");
+                (new PlayerCustom(player)).sendColouredMessage(FK_Util.getPrefix() + " &cVocê não possue permissão para visitar a warp.");
                 return true;
             }
 
@@ -44,8 +43,8 @@ public class Warp implements CommandExecutor {
                     World w = Bukkit.getWorld(Objects.requireNonNull(warps.getString(warpGet + ".world")));
                     Location loc = new Location(w, warps.getDouble(warpGet + ".x"), warps.getDouble(warpGet + ".y"), warps.getDouble(warpGet + ".z"), Float.valueOf(warps.getString(warpGet + ".yaw")), Float.valueOf(warps.getString(warpGet + ".pitch")));
                     playerForcado.teleport(loc);
-                    (new PlayerCustom(playerForcado)).sendColouredMessage(config.getString("options.prefix") + " &aO staff &f" + player.getDisplayName() + " &ateleportou você para a warp " + warpGet);
-                    (new PlayerCustom(player)).sendColouredMessage(config.getString("options.prefix") + " &aTeleportei o jogador &f" + playerForcado.getDisplayName() + " &afoi teleportado com sucesso!");
+                    (new PlayerCustom(playerForcado)).sendColouredMessage(FK_Util.getPrefix() + " &aO staff &f" + player.getDisplayName() + " &ateleportou você para a warp " + warpGet);
+                    (new PlayerCustom(player)).sendColouredMessage(FK_Util.getPrefix() + " &aTeleportei o jogador &f" + playerForcado.getDisplayName() + " &afoi teleportado com sucesso!");
                     return true;
                 }
 
@@ -70,7 +69,7 @@ public class Warp implements CommandExecutor {
             return true;
         } else {
             PlayerCustom p = new PlayerCustom(player);
-            p.sendColouredMessage(config.getString("options.prefix") + " &fInsira o nome da warp.");
+            p.sendColouredMessage(FK_Util.getPrefix() + " &fInsira o nome da warp.");
         }
         return true;
     }

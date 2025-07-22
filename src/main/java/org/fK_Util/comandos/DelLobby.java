@@ -16,14 +16,14 @@ public class DelLobby implements CommandExecutor {
 
         FileConfiguration config = FK_Util.getConfig("config");
         if (!(sender instanceof Player player)) {
-            System.out.println(config.getString("options.prefix") + " Apenas para jogadores!");
+            System.out.println(FK_Util.getPrefix() + " Apenas para jogadores!");
             return true;
         }
 
         PlayerCustom p = new PlayerCustom(player);
 
         if (!config.contains("essentialLocation.lobby")) {
-            p.sendColouredMessage(config.getString("options.prefix") + " &cNão encontrei a localização do lobby, por favor, avise a um administrador.");
+            p.sendColouredMessage(FK_Util.getPrefix() + " &cNão encontrei a localização do lobby, por favor, avise a um administrador.");
             return true;
         }
 

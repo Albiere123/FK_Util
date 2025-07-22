@@ -22,12 +22,12 @@ public class SetLobby implements CommandExecutor {
         PlayerCustom p = new PlayerCustom(player);
 
         if (!(player.hasPermission("FK_UTIL.Setlobby"))) {
-            p.sendColouredMessage(config.getString("options.prefix") + " &cVocê não possue permissão!");
+            p.sendColouredMessage(FK_Util.getPrefix() + " &cVocê não possue permissão!");
             return true;
         }
 
         if (config.contains("essentialLocation.lobby")) {
-            p.sendColouredMessage(config.getString("options.prefix") + " &cJá existe um lobby, por favor, delete o anterior e salve este.");
+            p.sendColouredMessage(FK_Util.getPrefix() + " &cJá existe um lobby, por favor, delete o anterior e salve este.");
             return true;
         }
 

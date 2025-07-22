@@ -44,9 +44,8 @@ public class Fake implements CommandExecutor {
             return true;
         }
         PlayerCustom pl = new PlayerCustom(((Player) sender).getPlayer());
-        FileConfiguration config = FK_Util.getConfig("config");
         if (!player.hasPermission("FK_UTIL.Fake")) {
-            pl.sendColouredMessage(config.getString("options.prefix") + " &cVocê não possue permissão!");
+            pl.sendColouredMessage(FK_Util.getPrefix() + " &cVocê não possue permissão!");
             return true;
         }
         String fakeNick = "";
@@ -61,7 +60,7 @@ public class Fake implements CommandExecutor {
             try {
                 String original = ORIGINAL_NAMES.getOrDefault(player, null);
                 if (original == null) {
-                    pl.sendColouredMessage(config.getString("options.prefix") + " &aNenhum Fake está ativo!");
+                    pl.sendColouredMessage(FK_Util.getPrefix() + " &aNenhum Fake está ativo!");
                     return true;
                 }
                 GameProfile profile = cp.getProfile();
@@ -79,7 +78,7 @@ public class Fake implements CommandExecutor {
                     online.showPlayer(player);
                 }
 
-                pl.sendColouredMessage(config.getString("options.prefix") + " &aFake retirado com sucesso!");
+                pl.sendColouredMessage(FK_Util.getPrefix() + " &aFake retirado com sucesso!");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -96,7 +95,7 @@ public class Fake implements CommandExecutor {
 
         applyFake(player, fakeNick, skin.value, skin.signature);
 
-        pl.sendColouredMessage(config.getString("options.prefix") + " &aFake aplicado como: &f" + fakeNick);
+        pl.sendColouredMessage(FK_Util.getPrefix() + " &aFake aplicado como: &f" + fakeNick);
 
         return true;
     }
@@ -159,5 +158,33 @@ public class Fake implements CommandExecutor {
     }
 
     private record SkinData(String value, String signature) {
+    }
+
+    public static void resetAllFakes() {
+        for (Map.Entry<Player, String> entry : ORIGINAL_NAMES.entrySet()) {
+            Player player = entry.getKey();
+            String original = entry.getValue();
+
+            try {
+                CraftPlayer cp = (CraftPlayer) player;
+                GameProfile profile = cp.getProfile();
+
+                Field nameField = GameProfile.class.getDeclaredField("name");
+                nameField.setAccessible(true);
+                nameField.set(profile, original);
+
+                player.setDisplayName(original);
+                player.setPlayerListName(original);
+
+                for (Player online : Bukkit.getOnlinePlayers()) {
+                    online.hidePlayer(player);
+                    online.showPlayer(player);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        ORIGINAL_NAMES.clear();
     }
 }

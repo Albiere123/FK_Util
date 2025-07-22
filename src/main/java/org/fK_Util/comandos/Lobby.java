@@ -20,14 +20,18 @@ public class Lobby implements CommandExecutor {
 
         FileConfiguration config = FK_Util.getConfig("config");
         if (!(sender instanceof Player player)) {
-            System.out.println(config.getString("options.prefix") + " Apenas jogadores podem usar este comando.");
+            System.out.println(FK_Util.getPrefix() + " Apenas jogadores podem usar este comando.");
             return true;
         }
 
         PlayerCustom p = new PlayerCustom(player);
+        if (!(player.hasPermission("FK_UTIL.Lobby"))) {
+            p.sendColouredMessage(FK_Util.getPrefix() + " &cVocê não possue permissão!");
+            return true;
+        }
 
         if (!config.contains("essentialLocation.lobby")) {
-            p.sendColouredMessage(config.getString("options.prefix") + " &cNão encontrei a localização do lobby, por favor, avise a um administrador.");
+            p.sendColouredMessage(FK_Util.getPrefix() + " &cNão encontrei a localização do lobby, por favor, avise a um administrador.");
             return true;
         }
 

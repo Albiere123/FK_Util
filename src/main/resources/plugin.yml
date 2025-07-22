@@ -2,7 +2,6 @@ name: FK_Util
 version: '1.0-SNAPSHOT'
 main: org.fK_Util.FK_Util
 api-version: '1.21.4'
-depend: [ ProtocolLib ]
 commands:
   ping:
     description: veja seu ping!
@@ -25,3 +24,5 @@ commands:
     description: set o lobby do servidor.
   dellobby:
     description: delete o lobby do servidor.
+  god:
+    description: um deus não toma dan, não é?

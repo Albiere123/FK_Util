@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.fK_Util.comandos.*;
+import org.fK_Util.eventos.GodEvent;
 import org.fK_Util.eventos.ResetFake;
 
 import java.util.Objects;
@@ -15,7 +16,7 @@ public final class FK_Util extends JavaPlugin {
     private static Config configM;
     private static FileConfiguration config;
     private static FileConfiguration warps;
-
+    private static String prefix;
 
     @Override
     public void onEnable() {
@@ -26,7 +27,9 @@ public final class FK_Util extends JavaPlugin {
             config.set("options.prefix", "&e[ &fFK_Util &e] &f");
             configM.saveConfig("config");
         }
+        prefix = config.getString("options.prefix");
         getServer().getPluginManager().registerEvents(new ResetFake(), this);
+        getServer().getPluginManager().registerEvents(new GodEvent(), this);
         Objects.requireNonNull(getCommand("ping")).setExecutor(new Ping());
         Objects.requireNonNull(getCommand("fkutil")).setExecutor(new FKUtil());
         Objects.requireNonNull(getCommand("warp")).setExecutor(new Warp());
@@ -37,7 +40,8 @@ public final class FK_Util extends JavaPlugin {
         Objects.requireNonNull(getCommand("lobby")).setExecutor(new Lobby());
         Objects.requireNonNull(getCommand("setlobby")).setExecutor(new SetLobby());
         Objects.requireNonNull(getCommand("dellobby")).setExecutor(new DelLobby());
-        Bukkit.getConsoleSender().sendMessage(Objects.requireNonNull(config.getString("options.prefix")).replaceAll("&", "§") + " Sistema Iniciado!!");
+        Objects.requireNonNull(getCommand("god")).setExecutor(new God());
+        Bukkit.getConsoleSender().sendMessage(Objects.requireNonNull(getPrefix()).replaceAll("&", "§") + " §fSistema Iniciado!!");
     }
 
     public static FileConfiguration getConfig(String str) {
@@ -46,6 +50,10 @@ public final class FK_Util extends JavaPlugin {
         } else {
             return config;
         }
+    }
+
+    public static String getPrefix() {
+        return prefix;
     }
 
     public static void saveWarp() {
@@ -62,7 +70,7 @@ public final class FK_Util extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        Fake.resetAllFakes();
     }
 
     public static Plugin getpl() {

@@ -26,21 +26,21 @@ public class Warps implements CommandExecutor {
         FileConfiguration warps = FK_Util.getConfig("warps");
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage(config.getString("options.prefix") + " Este comando só pode ser executado por jogadores.");
+            sender.sendMessage(FK_Util.getPrefix() + " Este comando só pode ser executado por jogadores.");
             return true;
         }
         PlayerCustom p = new PlayerCustom((Player) sender);
         Set<String> warpSet = warps.getKeys(false);
 
         if (warpSet.isEmpty()) {
-            p.sendColouredMessage(config.getString("options.prefix") + " &cNenhuma warp foi configurada ainda.");
+            p.sendColouredMessage(FK_Util.getPrefix() + " &cNenhuma warp foi configurada ainda.");
             return true;
         }
 
         String finalWarps = warpSet.stream().collect(Collectors.joining(" "));
 
 
-        p.sendColouredMessage(config.getString("options.prefix") + " Warps disponíveis: &e" + finalWarps);
+        p.sendColouredMessage(FK_Util.getPrefix() + " Warps disponíveis: &e" + finalWarps);
 
         return true;
     }

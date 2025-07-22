@@ -48,16 +48,16 @@ public class FKUtil implements CommandExecutor {
         if (sender instanceof Player) {
             PlayerCustom p = new PlayerCustom((Player) sender);
             if (prefix) {
-                p.sendColouredMessage(config.getString("options.prefix") + " " + str);
+                p.sendColouredMessage(FK_Util.getPrefix() + " " + str);
             } else {
-                String ultimaCor = getUltimoCodigoDeCor(Objects.requireNonNull(config.getString("options.prefix")));
+                String ultimaCor = getUltimoCodigoDeCor(Objects.requireNonNull(FK_Util.getPrefix()));
                 p.sendColouredMessage(ultimaCor.replaceAll("&", "§") + str);
             }
         } else {
             if (prefix) {
-                Bukkit.getConsoleSender().sendMessage(config.getString("options.prefix").replaceAll("&", "§") + " " + str);
+                Bukkit.getConsoleSender().sendMessage(FK_Util.getPrefix().replaceAll("&", "§") + " " + str);
             } else {
-                String ultimaCor = getUltimoCodigoDeCor(Objects.requireNonNull(config.getString("options.prefix")));
+                String ultimaCor = getUltimoCodigoDeCor(Objects.requireNonNull(FK_Util.getPrefix()));
                 Bukkit.getConsoleSender().sendMessage(ultimaCor.replaceAll("&", "§") + str);
             }
         }
