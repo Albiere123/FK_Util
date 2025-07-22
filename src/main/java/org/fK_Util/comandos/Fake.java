@@ -24,15 +24,21 @@ import java.util.regex.Pattern;
 public class Fake implements CommandExecutor {
 
     private final String[] fakeNicks = {
-            "RocketZeiro", "ChoraProGoat", "Jalim Rab@@", "Paraopebas"
+            "RocketZeiro", "ChoraProGoat", "Jalim Rab@@", "Paraopebas", "Goatão", "PokemonGO", "merbansgay", "luckbaitola"
     };
 
     private final List<String> skins = List.of(
             "069a79f4-44e9-4726-a5be-fca90e38aaf5",
-            "853c80ef-3c37-49fd-aa49-938b674adae6",
-            "61699b2e-d327-4a01-9f1e-0ea8c3f06bc6",
-            "ec70bcaf-702f-4bb8-b48d-276fa52a780c",
-            "b876ec32-e396-476b-a115-8438d83c67d4"
+            "853c80ef-3c37-49fd-aa49-938b674adae6", "37474fc2-5d27-4813-95a2-e743be01c231",
+            "61699b2e-d327-4a01-9f1e-0ea8c3f06bc6", "c7168458-33b3-47cf-b824-b9ee247019bf",
+            "ec70bcaf-702f-4bb8-b48d-276fa52a780c", "d40fd67b-219a-423b-b551-b44ec4843ff0",
+            "b876ec32-e396-476b-a115-8438d83c67d4", "4bb6f893-16b5-4d7a-80a3-bf2116b8dee5",
+            "221c25b6-3806-4dac-bccc-49aac6e73ab7", "89ea5140-58f4-4e25-919a-1a92c3488cfb",
+            "54e2e45d-aca0-4801-9a59-fefbb237a011", "67be48dc-d96e-45de-bda0-03b0d23e6142",
+            "5b2801b7-7934-49d4-ac3b-3ec8c9644104", "ac38802e-9eb0-4fb2-ad79-739796e8c5d6",
+            "63e79a9a-63ca-4e69-8d4f-3ad8616065ed", "e2280416-6232-4854-a25d-1841f3aee7d8",
+            "384c9e24-8e64-482f-b3d3-f73eb4058b48", "9761354f-7419-4125-8f9c-b5827ad2d836",
+            "62dadcee-7671-4e9a-9bad-8a5db6422b20", "b6d3afdc-519e-46ef-ab73-0c9cfa5a9249"
     );
 
     public static final Map<Player, String> ORIGINAL_NAMES = new HashMap<>();
@@ -50,11 +56,15 @@ public class Fake implements CommandExecutor {
         }
         String fakeNick = "";
         if (args.length > 0) {
+            if(args[0].length() > 16) {
+                pl.sendColouredMessage(FK_Util.getPrefix() + "&cNúmero máximo de caracteres no nome: 16");
+                return true;
+            }
             fakeNick = args[0];
         } else {
             fakeNick = fakeNicks[new Random().nextInt(fakeNicks.length)];
         }
-        if (Objects.equals(args[0], "reset")) {
+        if (args.length > 0 && Objects.equals(args[0], "reset")) {
             CraftPlayer cp = (CraftPlayer) player;
 
             try {

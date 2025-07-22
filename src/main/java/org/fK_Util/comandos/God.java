@@ -38,7 +38,7 @@ public class God implements CommandExecutor {
         setGod(player, !isGod(player));
         (new PlayerCustom(player)).sendColouredMessage(prefix + " &aGod " + (isGod(player) ? "&fativado" : "&fdesativado") + (player != p.getPlayer() ? " &apelo staff &f" + p.getPlayer().getDisplayName() : "."));
         if (player != p.getPlayer())
-            p.sendColouredMessage(prefix + " &eGod do usuário: &f" + player.getDisplayName() + (isGod(player) ? "&fativado." : "&fdesativado."));
+            p.sendColouredMessage(prefix + " &aGod do usuário: &f" + player.getDisplayName() + " &afoi " + (isGod(player) ? "&fativado." : "&fdesativado."));
         return true;
     }
 

@@ -33,7 +33,7 @@ public class Warp implements CommandExecutor {
             }
 
             if (!player.hasPermission("FK_UTIL.Warp.warps." + warpGet)) {
-                (new PlayerCustom(player)).sendColouredMessage(FK_Util.getPrefix() + " &cVocê não possue permissão para visitar a warp.");
+                (new PlayerCustom(player)).sendColouredMessage(FK_Util.getPrefix() + " &cVocê não possue permissão para visitar a warp &f" + warpGet +"&c.");
                 return true;
             }
 

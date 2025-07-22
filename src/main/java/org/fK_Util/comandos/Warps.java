@@ -18,7 +18,7 @@ public class Warps implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
 
         if (!sender.hasPermission("FK_UTIL.Warps")) {
-            sender.sendMessage(ChatColor.RED + "Você não possue permissão!");
+            sender.sendMessage(FK_Util.getPrefix() + ChatColor.RED + " Você não possue permissão!");
             return true;
         }
 

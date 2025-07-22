@@ -10,6 +10,10 @@ public class GodEvent implements Listener {
 
     @EventHandler
     public static void noDamage(EntityDamageEvent e) {
-        if (God.isGod((Player) e.getEntity())) e.setCancelled(true);
+
+        if (e.getEntity() instanceof  Player player) {
+            if (God.isGod(player)) e.setCancelled(true);
+        }
+
     }
 }
