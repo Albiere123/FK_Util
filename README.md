@@ -9,6 +9,7 @@ Plugin de minecraft focado em utilidades, comandos:
   - Fake
   - Ping
   - FkUtil
+  - God
 
 Sistema de permissões:
   - FK_UTIL.\<Comando>
