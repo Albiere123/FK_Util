@@ -26,3 +26,15 @@ commands:
     description: delete o lobby do servidor.
   god:
     description: um deus não toma dan, não é?
+  tpa:
+    description: Solicita teleporte para outro jogador.
+  tpaccept:
+    description: Aceita um pedido de teleporte.
+  tpdeny:
+    description: Recusa um pedido de teleporte.
+  back:
+    description: Retorne ao seu ultimo local.
+  fly:
+    description: Habilite seu modo de voo ou altere o de alguém.
+  heal:
+    description: Se regenere ou regenere alguém.

@@ -10,10 +10,12 @@ Plugin de minecraft focado em utilidades, comandos:
   - Ping
   - FkUtil
   - God
+  - Back
   - Tpa
   - Tpaccept
   - Tpdeny
-  - Back
+  - Heal
+  - Fly
 
 Sistema de permissões:
   - FK_UTIL.\<Comando>

@@ -64,8 +64,10 @@ public class Warp implements CommandExecutor {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            Back.setBack(player, player.getLocation());
             p.getPlayer().teleport(loc);
             p.getPlayer().sendTitle("§eTeleportado com §lSucesso!", " ");
+
             return true;
         } else {
             PlayerCustom p = new PlayerCustom(player);

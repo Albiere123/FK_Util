@@ -1,14 +1,19 @@
-package org.fK_Util.comandos.TPA;
+package org.fK_Util.comandos;
 
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.fK_Util.FK_Util;
+import org.fK_Util.PlayerCustom;
+import org.fK_Util.comandos.TPA.Manager;
 
 public class Tpa implements CommandExecutor {
 
-    private Manager tpaManager;
+    private final Manager tpaManager;
 
     public Tpa(Manager tpaManager) {
         this.tpaManager = tpaManager;
@@ -16,31 +21,59 @@ public class Tpa implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        String prefix = FK_Util.getPrefix();
         if (!(sender instanceof Player player)) {
-            sender.sendMessage("Apenas jogadores podem usar isso.");
+            sender.sendMessage(prefix + " Apenas jogadores podem usar isso.");
+            return true;
+        }
+
+        PlayerCustom p = new PlayerCustom(player);
+
+        if (!player.hasPermission("FK_UTIL.Tpa")) {
+            (new PlayerCustom(player)).sendColouredMessage(prefix + " &cVocê não possue permissão!");
             return true;
         }
 
         if (args.length != 1) {
-            player.sendMessage("Uso correto: /tpa <jogador>");
+            p.sendColouredMessage(prefix + " &cUso correto: /tpa <jogador>");
             return true;
         }
 
         Player alvo = Bukkit.getPlayerExact(args[0]);
 
         if (alvo == null || !alvo.isOnline()) {
-            player.sendMessage("Jogador não encontrado ou offline.");
+            p.sendColouredMessage(prefix + " &cJogador não encontrado ou offline.");
             return true;
         }
 
         if (alvo.equals(player)) {
-            player.sendMessage("Você não pode mandar TPA para si mesmo.");
+            p.sendColouredMessage(prefix + " &cVocê não pode mandar TPA para si mesmo.");
             return true;
         }
 
         tpaManager.adicionarPedido(player, alvo);
-        player.sendMessage("Pedido de teleporte enviado para " + alvo.getName());
-        alvo.sendMessage(player.getName() + " quer teleportar até você. Use /tpaccept ou /tpdeny.");
+
+        p.sendColouredMessage(prefix + " &aPedido de teleporte enviado para &f" + alvo.getName());
+
+        TextComponent mensagem = new TextComponent(prefix + " §f" + player.getName() + " §equero teleportar até você. ");
+
+        TextComponent aceitar = new TextComponent("[ACEITAR]");
+        aceitar.setColor(net.md_5.bungee.api.ChatColor.GREEN);
+        aceitar.setBold(true);
+        aceitar.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpaccept"));
+
+        TextComponent recusar = new TextComponent("[RECUSAR]");
+        recusar.setColor(net.md_5.bungee.api.ChatColor.RED);
+        recusar.setBold(true);
+        recusar.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpdeny"));
+
+        mensagem.addExtra(" ");
+        mensagem.addExtra(aceitar);
+        mensagem.addExtra(" ");
+        mensagem.addExtra(recusar);
+
+        alvo.spigot().sendMessage(mensagem);
+
         return true;
     }
 }

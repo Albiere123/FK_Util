@@ -15,8 +15,14 @@ public class DelLobby implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         FileConfiguration config = FK_Util.getConfig("config");
+        String prefix = FK_Util.getPrefix();
         if (!(sender instanceof Player player)) {
             System.out.println(FK_Util.getPrefix() + " Apenas para jogadores!");
+            return true;
+        }
+
+        if (!player.hasPermission("FK_UTIL.Delloby")) {
+            (new PlayerCustom(player)).sendColouredMessage(prefix + " &cVocê não possue permissão!");
             return true;
         }
 

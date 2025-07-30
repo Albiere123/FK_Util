@@ -56,6 +56,7 @@ public class Lobby implements CommandExecutor {
             throw new RuntimeException(e);
         }
 
+        Back.setBack(player, player.getLocation());
         player.teleport(lobby);
         p.sendColouredMessage(config.get("options.prefix") + " &aTeleportado com sucesso!");
         return true;
