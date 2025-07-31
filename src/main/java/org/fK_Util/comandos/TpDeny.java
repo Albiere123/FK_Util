@@ -23,23 +23,24 @@ public class TpDeny implements CommandExecutor {
             return true;
         }
 
+        String prefix = FK_Util.getPrefix();
         if (!player.hasPermission("FK_UTIL.Tpdeny")) {
             (new PlayerCustom(player)).sendColouredMessage(FK_Util.getPrefix() + " &cVocê não possue permissão!");
             return true;
         }
 
         if (!tpaManager.temPedido(player)) {
-            player.sendMessage("Você não tem pedidos de teleporte.");
+            player.sendMessage(prefix + " &cVocê não tem pedidos de teleporte.");
             return true;
         }
 
         Player solicitante = tpaManager.getSolicitante(player);
 
         if (solicitante != null && solicitante.isOnline()) {
-            solicitante.sendMessage("Seu pedido foi negado por " + player.getName());
+            solicitante.sendMessage(prefix + " &cSeu pedido foi negado por &f" + player.getName());
         }
 
-        player.sendMessage("Você negou o pedido de teleporte.");
+        player.sendMessage(prefix + " &cVocê negou o pedido de teleporte.");
         tpaManager.removerPedido(player);
 
         return true;

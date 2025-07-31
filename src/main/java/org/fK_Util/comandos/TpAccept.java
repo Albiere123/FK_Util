@@ -23,28 +23,29 @@ public class TpAccept implements CommandExecutor {
             return true;
         }
 
+        String prefix = FK_Util.getPrefix();
         if (!player.hasPermission("FK_UTIL.Tpaccept")) {
-            (new PlayerCustom(player)).sendColouredMessage(FK_Util.getPrefix() + " &cVocê não possue permissão!");
+            (new PlayerCustom(player)).sendColouredMessage(prefix + " &cVocê não possue permissão!");
             return true;
         }
 
         if (!tpaManager.temPedido(player)) {
-            player.sendMessage("Você não tem pedidos de teleporte.");
+            player.sendMessage(prefix + " &cVocê não tem pedidos de teleporte.");
             return true;
         }
 
         Player solicitante = tpaManager.getSolicitante(player);
 
         if (solicitante == null || !solicitante.isOnline()) {
-            player.sendMessage("O jogador que fez o pedido não está mais online.");
+            player.sendMessage(prefix + " &cO jogador que fez o pedido não está mais online.");
             tpaManager.removerPedido(player);
             return true;
         }
 
         Back.setBack(solicitante.getPlayer(), solicitante.getLocation());
+        solicitante.sendMessage(prefix + " &aSeu pedido foi aceito! Teleportando...");
         solicitante.teleport(player.getLocation());
-        solicitante.sendMessage("Seu pedido foi aceito! Teleportando...");
-        player.sendMessage("Você aceitou o pedido de " + solicitante.getName());
+        player.sendMessage(prefix + " &aVocê aceitou o pedido de " + solicitante.getName());
         tpaManager.removerPedido(player);
 
         return true;
