@@ -4,8 +4,10 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class Manager {
+
     private final Map<Player, Player> pedidos = new HashMap<>();
 
     public void adicionarPedido(Player solicitante, Player alvo) {
